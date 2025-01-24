@@ -15,7 +15,7 @@
 //   "consultation": "http://glowderma.com/book-appointment"
 // })
 // })
-// app.get("/services", (req, res) => {
+// app.get("/services", (req, res) => {-
 //     res.send("Services provided by Skinfinity")
 // })
 // app.get("/products", (req, res) => {
@@ -111,10 +111,20 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { rateLimit } from 'express-rate-limit';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 let PORT = process.env.PORT || 5000;
+
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    message : "You have exceeded the 5 requests in 15 minutes limit!"});
+  
+  app.use(limiter);
+  
 app.use(express.json());
 
 app.use((req, res, next) => {

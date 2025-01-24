@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>{{title}}</h1>
+    </header>
+
+    <section>
+        <h2>Our Offerings</h2>
+        {{#each offerings}}
+        <div class="offering-card {{#unless available}}unavailable{{/unless}}">
+            <h3>{{name}}</h3>
+            <p><strong>Price:</strong> ₹{{price}}</p>
+            <p><strong>Duration:</strong> {{duration}}</p>
+            <p>{{description}}</p>
+            {{#unless available}}
+            <div class="unavailable-text">
+                <p>Currently Unavailable</p>
+            </div>
+            {{/unless}}
+        </div>
+        {{/each}}
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Your Clinic. All rights reserved.</p>
+    </footer>
+</body>
+</html>
